@@ -1,115 +1,132 @@
-import Image from "next/image";
-import localFont from "next/font/local";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { useState, useEffect } from 'react';
+import Header from '../app/components/header';
+import Footer from '../app/components/footer';
+import { client } from '@/sanity/lib/client';
+import Hero from './hero'; // Import Hero component
+import DropdownMenu from './dropdown';
 
 export default function Home() {
-  return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [products, setProducts] = useState<any[]>([]);
+  const [trendingProducts, setTrendingProducts] = useState<any[]>([]);
+  const [bikes, setBikes] = useState<any[]>([]); // State for bike data
+  const [cars, setCars] = useState<any[]>([]); // State for car data
+  const [loading, setLoading] = useState(true);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const productsData = await client.fetch(`
+          *[_type == "product"]{
+            name,
+            description,
+            price,
+            discountedPrice,
+            "imageUrl": image.asset->url,
+            "slug": slug.current
+          }
+        `);
+
+        const trendingData = await client.fetch(`
+          *[_type == "trending"]{
+            name,
+            description,
+            price,
+            discountedPrice,
+            "imageUrl": image.asset->url,
+            "slug": slug.current
+          }
+        `);
+
+        const bikeData = await client.fetch(`
+          *[_type == "bike"]{
+            name,
+            description,
+            price,
+            discountedPrice,
+            "imageUrl": image.asset->url,
+            "slug": slug.current
+          }
+        `);
+
+        const carData = await client.fetch(`
+          *[_type == "car"]{
+            name,
+            description,
+            price,
+            discountedPrice,
+            "imageUrl": image.asset->url,
+            "slug": slug.current
+          }
+        `);
+
+        setProducts(productsData);
+        setTrendingProducts(trendingData);
+        setBikes(bikeData);
+        setCars(carData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) return <p className="text-center mt-10 text-xl">Loading...</p>;
+
+  const renderProductList = (productList: any[], title: string) => (
+    <div className="container mx-auto px-0 py-8">
+      <h1 className="text-3xl font-bold text-center mb-8">{title}</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        {productList.map((product, index) => (
+          <div
+            key={index}
+            className="border border-gray-200 rounded-lg p-4 shadow-lg bg-white transform transition duration-300 hover:scale-105"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            {product.imageUrl && (
+              <a href={`/product/${product.slug}`} className="block">
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="w-full h-64 object-cover rounded-t-lg mb-4"
+                />
+              </a>
+            )}
+            <h2 className="text-lg font-semibold mb-2">
+              <a href={`/product/${product.slug}`} className="text-black hover:no-underline">
+                {product.name}
+              </a>
+            </h2>
+            <p className="text-gray-600 mb-4">{product.description}</p>
+            <div className="flex justify-between items-center">
+              <p className="text-lg font-bold text-red-600">
+                {typeof product.price === 'number'
+                  ? `$${product.price.toFixed(2)}`
+                  : product.price || 'N/A'}
+              </p>
+              {product.discountedPrice !== null && product.discountedPrice < product.price ? (
+                <p className="text-lg font-semibold text-green-600 line-through">
+                  ${product.discountedPrice.toFixed(2)}
+                </p>
+              ) : null}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <div>
+      <Header />
+      <DropdownMenu />
+      <Hero /> {/* Added Hero component after Header */}
+      {renderProductList(products, 'Product List')}
+      {renderProductList(trendingProducts, 'Trending Products')}
+      {renderProductList(bikes, 'Bike Products')}
+      {renderProductList(cars, 'Car Products')} {/* Render car data */}
+      <Footer />
     </div>
   );
 }

@@ -13,8 +13,8 @@ import { bikeAccessories } from  './bike-accessories'
 import { bikeParts } from  './bike-parts'
 import { carCareProducts } from  './car-care-products'
 import { touringGadgets } from  './touring-gadgets'
-
+import attentionBar  from './attenionBar';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [product,touringGadgets,carCareProducts, hero,bikeParts, menu,trending,bike,car,sale,searchByCars,searchByBikes,carAccessories,bikeAccessories ] // Correctly includes Menu schema
+  types: [product,touringGadgets,carCareProducts,attentionBar, hero,bikeParts, menu,trending,bike,car,sale,searchByCars,searchByBikes,carAccessories,bikeAccessories ] // Correctly includes Menu schema
 };

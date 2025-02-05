@@ -6,11 +6,10 @@ export const hero: SchemaTypeDefinition = {
   type: 'document',
   fields: [
     {
-      name: 'image',
+      name: 'image', // Changed to singular 'image' since it's a single image
       title: 'Image',
-      type: 'image',
-      options: { hotspot: true }, // Enables hot spot for image cropping
+      type: 'image', // Single image type
+      options: { hotspot: true }, // Enables hotspot for image cropping
     },
   ],
 };
-

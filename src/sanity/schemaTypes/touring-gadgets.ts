@@ -43,6 +43,11 @@ export const touringGadgets: SchemaTypeDefinition = {
       title: 'Slug',
       type: 'slug',
       options: { source: 'name', maxLength: 96 },
+    },{
+      name: 'inStock',
+      title: 'In Stock',
+      type: 'boolean', // Indicates if the product is in stock
+      description: 'Check this box if the product is available in stock.',
     },
   ],
 };

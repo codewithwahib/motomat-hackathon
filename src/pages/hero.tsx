@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { client } from '@/sanity/lib/client';  // Adjust import path if necessary
+import Image from 'next/image';
+import { client } from '@/sanity/lib/client';  // Adjust the path if needed
 
 export default function Hero() {
   const [heroImage, setHeroImage] = useState<string | null>(null);
@@ -8,7 +9,7 @@ export default function Hero() {
     client
       .fetch(`*[_type == "hero"][0]{ "imageUrl": image.asset->url }`)
       .then((data) => {
-        if (data.imageUrl) {
+        if (data?.imageUrl) {
           setHeroImage(data.imageUrl);
         }
       })
@@ -23,7 +24,15 @@ export default function Hero() {
 
   return (
     <div className="hero">
-      <img src={heroImage} alt="Hero Banner" className="w-full h-auto object-cover" />
+      <Image
+        src={heroImage}
+        alt="Hero Banner"
+        layout="responsive"
+        width={1200}  // Adjust width
+        height={600}  // Adjust height
+        className="object-cover"
+        priority  // Ensures this image loads quickly for better LCP
+      />
     </div>
   );
 }

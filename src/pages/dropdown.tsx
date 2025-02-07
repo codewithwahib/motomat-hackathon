@@ -24,13 +24,13 @@ const DropdownMenu: React.FC = () => {
         {[
           { label: 'Home', href: '/' },
           { label: 'Sale', href: '/sale' },
-          { label: 'Car Accessories', href: '/car-accessories' },
-          { label: 'Bike Accessories', href: '/bike-accessories' },
-          { label: 'Car Care Products', href: '/car-care-products' },
-          { label: 'Touring Gadgets', href: '/touring-gadgets' },
-          { label: 'Bike Parts', href: '/bike-parts' },
-          { label: 'Search By Bikes', href: '/search-by-bikes' },
-          { label: 'Search By Cars', href: '/search-by-cars' },
+          { label: 'Charging', href: '/charging' },
+          { label: 'Laptop', href: '/laptop' },
+          { label: 'Cables', href: '/cables' },
+          { label: 'Smart Watches', href: '/smartwatches' },
+          { label: 'Earbuds', href: '/earbuds' },
+          { label: 'Gaming', href: '/gaming' },
+          { label: 'Phone Cases', href: '/phonecases' },
         ].map((menuItem, index) => (
           <li key={index} className="relative group">
             <Link
@@ -50,13 +50,13 @@ const DropdownMenu: React.FC = () => {
         {[
           { label: 'Home', href: '/' },
           { label: 'Sale', href: '/sale' },
-          { label: 'Car Accessories', href: '/car-accessories' },
-          { label: 'Bike Accessories', href: '/bike-accessories' },
-          { label: 'Car Care Products', href: '/car-care-products' },
-          { label: 'Touring Gadgets', href: '/touring-gadgets' },
-          { label: 'Bike Parts', href: '/bike-parts' },
-          { label: 'Search By Bikes', href: '/search-by-bikes' },
-          { label: 'Search By Cars', href: '/search-by-cars' },
+          { label: 'Charging', href: '/charging' },
+          { label: 'Laptop', href: '/laptop' },
+          { label: 'Cables', href: '/cables' },
+          { label: 'Smart Watches', href: '/smartwatches' },
+          { label: 'Earbuds', href: '/earbuds' },
+          { label: 'Gaming', href: '/gaming' },
+          { label: 'Phone Cases', href: '/phonecases' },
         ].map((menuItem, index) => (
           <li key={index} className="border-b border-gray-300">
             <Link

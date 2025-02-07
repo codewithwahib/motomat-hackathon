@@ -172,10 +172,10 @@ export default function TouringGadgetsPage() {
     <div>
       <Header />
       <DropdownMenu />
-      {renderProductList(touringGadgets, 'Touring Gadgets')}
-      {renderProductList(trendingGadgets, 'Trending Gadgets')}
-      {renderProductList(bikes, 'Bike Gadgets')}
-      {renderProductList(cars, 'Car Gadgets')}
+      {renderProductList(touringGadgets, 'Smart Gadget ')}
+      {renderProductList(trendingGadgets, 'Bluetooth Gadgets')}
+      {renderProductList(bikes, 'Gaming Gadgets')}
+      {renderProductList(cars, 'Kitchen Gadgets')}
       <Footer />
     </div>
   );

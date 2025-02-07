@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header>
       {/* Top Header */}
-      <div className="bg-black text-white text-sm sm:text-lg pt-3 h-14 font-bold w-full flex justify-between items-center px-4 relative">
+      <div className="bg-blue-500 text-white text-sm sm:text-lg pt-3 h-14 font-bold w-full flex justify-between items-center px-4 relative">
         {/* WhatsApp Number and Email (on mobile, stacked vertically) */}
         <div className="flex items-center space-x-4 sm:space-x-6">
           {/* WhatsApp Icon and Link */}
@@ -20,7 +20,7 @@ const Header = () => {
               className="text-white text-xs sm:text-sm hover:underline"
               aria-label="WhatsApp Chat"
             >
-              <span>0317-2196866</span>
+              <span>0123-45678</span>
             </a>
           </div>
 
@@ -32,17 +32,17 @@ const Header = () => {
               className="text-white text-xs sm:text-sm hover:underline"
               aria-label="Send an email"
             >
-              <span>customer.motomart@gmail.com</span>
+              <span>customer.ecorner@gmail.com</span>
             </a>
           </div>
         </div>
 
         {/* Welcome Message */}
-        <p className="absolute left-1/2 transform -translate-x-1/2 text-xs sm:text-lg">Welcome To Moto Mart | بسم الله الرحمن الرحيم</p>
+        <p className="absolute left-1/2 transform -translate-x-1/2 text-xs sm:text-lg">Welcome To E-Corner</p>
       </div>
 
       {/* Main Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-center bg-black shadow-md p-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center bg-blue-900 shadow-md p-4">
         {/* Logo */}
         <div className="logo flex justify-center sm:justify-start w-full sm:w-auto">
           <Link href="/">
@@ -69,7 +69,7 @@ const Header = () => {
           <div className="cart flex items-center space-x-2">
             <Link href="/cart" aria-label="Go to cart" className="text-red-500 hover:underline flex items-center">
               <FaShoppingCart size={20} />
-              <span className="ml-1">Cart</span>
+              <span className="ml-1">Shopping Bag</span>
             </Link>
             <span className="cart-count bg-red-500 text-white rounded-full px-2 text-sm">0</span> {/* Dynamic Cart Count */}
           </div>

@@ -56,7 +56,7 @@ export default function TouringGadgetsPage() {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-8 flex items-center justify-center">
           <span className="flex-grow h-[1px] bg-gray-300 mr-4 hidden sm:block"></span>
-          Touring Gadgets
+          Smart Watches
           <span className="flex-grow h-[1px] bg-gray-300 ml-4 hidden sm:block"></span>
         </h1>
 

@@ -23,7 +23,7 @@ export default function TouringGadgetsPage() {
     const fetchTouringGadgets = async () => {
       try {
         const gadgetsData = await client.fetch(`
-          *[_type == "car-care-products"]{
+          *[_type == "bike-accessories"]{
             name,
             price,
             discountedPrice,
@@ -56,8 +56,7 @@ export default function TouringGadgetsPage() {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-8 flex items-center justify-center">
           <span className="flex-grow h-[1px] bg-gray-300 mr-4 hidden sm:block"></span>
-          Car Care Products
-          <span className="flex-grow h-[1px] bg-gray-300 ml-4 hidden sm:block"></span>
+Laptop          <span className="flex-grow h-[1px] bg-gray-300 ml-4 hidden sm:block"></span>
         </h1>
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">

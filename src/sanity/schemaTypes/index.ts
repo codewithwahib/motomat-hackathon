@@ -1,7 +1,6 @@
 import { SchemaTypeDefinition } from 'sanity';
-import { product } from './product'; // Correct import for product schema
-import { hero } from './hero'; // Correct import for hero schema
-import { menu } from './menu'; // Correct import for Menu schema
+import { product } from './prducts'
+import { hero } from './hero';
 import { trending } from './trending'
 import { bike } from './bike'
 import { car } from './car'
@@ -13,8 +12,8 @@ import { bikeAccessories } from  './bike-accessories'
 import { bikeParts } from  './bike-parts'
 import { carCareProducts } from  './car-care-products'
 import { touringGadgets } from  './touring-gadgets'
-import attentionBar  from './attenionBar';
+import attentionBar  from './attentionBar';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [product,touringGadgets,carCareProducts,attentionBar, hero,bikeParts, menu,trending,bike,car,sale,searchByCars,searchByBikes,carAccessories,bikeAccessories ] // Correctly includes Menu schema
+  types: [product,touringGadgets,carCareProducts,attentionBar, hero,bikeParts,trending,bike,car,sale,searchByCars,searchByBikes,carAccessories,bikeAccessories ] // Correctly includes Menu schema
 };

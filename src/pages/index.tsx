@@ -1,10 +1,12 @@
+// File: src/app/pages/touring-gadgets-page.tsx
 import { useState, useEffect } from 'react';
-import Header from '../app/components/header';
-import Footer from '../app/components/footer';
+import Header from '@/app/components/header';
+import Footer from '@/app/components/footer';
 import { client } from '@/sanity/lib/client';
 import DropdownMenu from './dropdown';
-import Image from 'next/image'; // Importing Image from next/image for optimization
+import Image from 'next/image';
 import Loading from '@/app/components/loading';
+import { useCart } from '@/app/contexts/cartcontext';
 
 // Define the structure of a Gadget
 interface Gadget {
@@ -21,6 +23,9 @@ export default function TouringGadgetsPage() {
   const [bikes, setBikes] = useState<Gadget[]>([]);
   const [cars, setCars] = useState<Gadget[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Get addToCart from the cart context
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchGadgets = async () => {
@@ -76,7 +81,18 @@ export default function TouringGadgetsPage() {
     fetchGadgets();
   }, []);
 
+  // When a product is added, create a cart item and call addToCart
   const handleAddToCart = (gadget: Gadget) => {
+    const cartItem = {
+      id: gadget.slug, // Use slug as the unique identifier (or use a proper id if available)
+      name: gadget.name,
+      price: gadget.price,
+      discountedPrice: gadget.discountedPrice,
+      imageUrl: gadget.imageUrl,
+      slug: gadget.slug,
+      quantity: 1, // Start with a quantity of 1
+    };
+    addToCart(cartItem);
     console.log(`Added to cart: ${gadget.name}`);
     alert(`${gadget.name} has been added to your cart.`);
   };
@@ -112,7 +128,10 @@ export default function TouringGadgetsPage() {
                 </div>
               )}
               <h2 className="text-sm sm:text-lg font-semibold mb-2">
-                <a href={`/products/${gadget.slug}`} className="text-black hover:no-underline">
+                <a
+                  href={`/products/${gadget.slug}`}
+                  className="text-black hover:no-underline"
+                >
                   {gadget.name}
                 </a>
               </h2>
@@ -122,7 +141,8 @@ export default function TouringGadgetsPage() {
                     ? `$${gadget.price.toFixed(2)}`
                     : gadget.price || 'N/A'}
                 </p>
-                {gadget.discountedPrice && gadget.discountedPrice < gadget.price ? (
+                {gadget.discountedPrice &&
+                gadget.discountedPrice < gadget.price ? (
                   <p className="text-lg font-semibold text-green-600 line-through">
                     ${gadget.discountedPrice?.toFixed(2)}
                   </p>
@@ -145,7 +165,8 @@ export default function TouringGadgetsPage() {
     </div>
   );
 
-  if (loading) return <p className="text-center mt-10 text-xl"><Loading /></p>;
+  if (loading)
+    return <p className="text-center mt-10 text-xl"><Loading /></p>;
 
   return (
     <div>
